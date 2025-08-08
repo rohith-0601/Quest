@@ -1,0 +1,1992 @@
+
+## 🔹 1. THEORY
+
+### ✅ What is a **Class**?
+
+* A **class** is a **blueprint** or **template** for creating objects.
+* It defines:
+
+  * **Data members** (variables or attributes)
+  * **Methods** (functions that define behavior)
+
+Think of a class as a **plan** for building something — like a blueprint for a house.
+
+---
+
+### ✅ What is an **Object**?
+
+* An **object** is an **instance** of a class.
+* It occupies memory and has a state (data) and behavior (methods).
+* You create objects from a class using the `new` keyword.
+
+> 🔁 You can create **multiple objects** from a single class — each object has its **own copy** of data members.
+
+---
+
+## 🔹 2. SIMPLE EXAMPLE
+
+Let's define a **`Car` class** and create objects from it.
+
+### ✅ Code:
+
+```java
+// Class definition
+class Car {
+    // Data members (also called fields or attributes)
+    String brand;
+    int speed;
+
+    // Method (behavior)
+    void drive() {
+        System.out.println(brand + " is driving at " + speed + " km/h.");
+    }
+}
+
+// Main class
+public class Main {
+    public static void main(String[] args) {
+        // Creating first object
+        Car car1 = new Car();
+        car1.brand = "Toyota";
+        car1.speed = 120;
+
+        // Creating second object
+        Car car2 = new Car();
+        car2.brand = "BMW";
+        car2.speed = 150;
+
+        // Calling methods
+        car1.drive(); // Toyota is driving at 120 km/h.
+        car2.drive(); // BMW is driving at 150 km/h.
+    }
+}
+```
+
+---
+
+### ✅ Output:
+
+```
+Toyota is driving at 120 km/h.
+BMW is driving at 150 km/h.
+```
+
+---
+
+## 🔹 3. WORKFLOW / BEHIND THE SCENES
+
+1. `class Car` defines a blueprint.
+2. Each `Car` object (`car1`, `car2`) has its **own** `brand` and `speed`.
+3. `new Car()` allocates memory and creates the object.
+4. Method `drive()` prints the object's current state.
+
+---
+
+## 🔹 4. KEY TERMS
+
+| Term             | Meaning                                                        |
+| ---------------- | -------------------------------------------------------------- |
+| Class            | Template or blueprint for creating objects                     |
+| Object           | Instance of a class; real-world entity with state and behavior |
+| new              | Keyword used to create objects                                 |
+| Field / Variable | Stores data inside the object                                  |
+| Method           | Performs operations / defines behavior                         |
+
+---
+
+## 🔹 5. REAL-WORLD ANALOGY
+
+* **Class** → Blueprint of a "Smartphone"
+* **Object** → Your actual iPhone or Samsung device
+* Each object has its own brand, battery level, apps (data), and can make calls or send messages (methods)
+
+---
+
+## 🔹 6. BONUS: MEMORY DIAGRAM (for better visualization)
+
+```text
+Memory:
+
+car1 → | brand: "Toyota" | speed: 120 |
+car2 → | brand: "BMW"    | speed: 150 |
+```
+
+Each object has separate memory for `brand` and `speed`.
+
+---
+
+
+
+
+
+
+
+
+
+## 🔹 What is an **Instance** in Java?
+
+### ✅ Definition:
+
+An **instance** is a **real, usable object** created from a class.
+
+> When you create an object using the `new` keyword, you are creating an **instance** of a class.
+
+---
+
+### ✅ Example:
+
+```java
+class Dog {
+    String name;
+    void bark() {
+        System.out.println(name + " is barking!");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Dog d1 = new Dog(); // d1 is an instance of Dog
+        d1.name = "Rocky";
+        d1.bark(); // Output: Rocky is barking!
+    }
+}
+```
+
+### 💡 Explanation:
+
+* `Dog` is a **class**.
+* `d1` is an **instance** of the `Dog` class.
+* This instance:
+
+  * Has its own copy of the `name` variable.
+  * Can call the `bark()` method.
+
+---
+
+## 🔁 Difference between Class and Instance:
+
+| Term         | Description                                                                |
+| ------------ | -------------------------------------------------------------------------- |
+| **Class**    | Blueprint — does not occupy memory for fields unless an object is created. |
+| **Instance** | Real object created from the class — occupies memory and has data.         |
+
+---
+
+### ✅ Analogy:
+
+| Concept  | Example                                  |
+| -------- | ---------------------------------------- |
+| Class    | `Car` blueprint                          |
+| Instance | Real car you drive (like `car1`, `car2`) |
+
+---
+
+## 🧠 Quick Test:
+
+If you have:
+
+```java
+Student s1 = new Student();
+Student s2 = new Student();
+```
+
+Then:
+
+* `s1` and `s2` are **instances** of the `Student` class.
+* Each instance has its **own memory** and **state**.
+
+---
+
+
+
+
+
+
+
+
+## 🔹 1. THEORY: What Are Access Modifiers?
+
+**Access Modifiers** define **how visible or accessible** a **class, variable, constructor, or method** is to other parts of the code (other classes or packages).
+
+They are used to implement **encapsulation** and **information hiding**, two key pillars of OOP.
+
+---
+
+## 🔹 2. TYPES OF ACCESS MODIFIERS IN JAVA
+
+There are **4 access levels** in Java:
+
+| Modifier                    | Accessible Within Class | Same Package | Subclass in Other Package | Other Packages |
+| --------------------------- | ----------------------- | ------------ | ------------------------- | -------------- |
+| **private**                 | ✅ Yes                   | ❌ No         | ❌ No                      | ❌ No           |
+| **default** *(no modifier)* | ✅ Yes                   | ✅ Yes        | ❌ No                      | ❌ No           |
+| **protected**               | ✅ Yes                   | ✅ Yes        | ✅ Yes                     | ❌ No           |
+| **public**                  | ✅ Yes                   | ✅ Yes        | ✅ Yes                     | ✅ Yes          |
+
+---
+
+## 🔹 3. EXAMPLES FOR EACH MODIFIER
+
+### ✅ `private` Example:
+
+```java
+class Person {
+    private String name;
+
+    public void setName(String n) {
+        name = n;
+    }
+
+    public void getName() {
+        System.out.println(name);
+    }
+}
+```
+
+* `name` is **private** → accessible **only inside the `Person` class**
+* You use **getters/setters** to access it (this is **encapsulation**)
+
+---
+
+### ✅ `default` Example *(no modifier)*:
+
+```java
+class Car {
+    int speed; // default access
+}
+```
+
+* Accessible **only within the same package**
+* If accessed from a different package → ❌ error
+
+---
+
+### ✅ `protected` Example:
+
+```java
+class Animal {
+    protected void eat() {
+        System.out.println("Animal is eating");
+    }
+}
+
+class Dog extends Animal {
+    void bark() {
+        eat(); // ✅ allowed because it's inherited
+    }
+}
+```
+
+* `protected` allows access in:
+
+  * Same package ✅
+  * Subclasses in other packages ✅
+  * Other classes in different packages ❌
+
+---
+
+### ✅ `public` Example:
+
+```java
+public class Hello {
+    public void sayHello() {
+        System.out.println("Hello, world!");
+    }
+}
+```
+
+* Can be accessed from **anywhere**
+
+---
+
+## 🔹 4. WHEN TO USE WHAT?
+
+| Scenario                                  | Recommended Modifier       |
+| ----------------------------------------- | -------------------------- |
+| Hide sensitive data (e.g., passwords)     | `private`                  |
+| Allow reuse in same package               | *(default)* or `protected` |
+| Allow inheritance from other packages     | `protected`                |
+| Allow full public use (e.g., API methods) | `public`                   |
+
+---
+
+## 🔹 5. INTERVIEW ONE-LINER EXPLANATIONS
+
+* **private** → Most restrictive. Only within the same class.
+* **default** → No modifier. Accessible only within the same package.
+* **protected** → Accessible within the same package + subclasses in other packages.
+* **public** → Accessible from anywhere.
+
+---
+
+## 🔹 6. BONUS: Access Modifiers with Classes
+
+| Modifier      | Class Level Allowed? | Example                    |
+| ------------- | -------------------- | -------------------------- |
+| **public**    | ✅ Yes                | `public class A {}`        |
+| **default**   | ✅ Yes                | `class A {}` (no modifier) |
+| **private**   | ❌ No                 | ❌ Compilation Error        |
+| **protected** | ❌ No                 | ❌ Compilation Error        |
+
+> 🔸 Only `public` and default access are allowed at the **top-level class**.
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+## 🔹 💡 Real-World Scenario: Banking System
+
+We’ll use a simple **`BankAccount`** class and simulate access using different modifiers.
+
+### 👇 File Structure:
+
+```
+/bank
+    BankAccount.java
+    InternalAudit.java
+/other
+    ExternalAudit.java
+Main.java
+```
+
+---
+
+### ✅ `BankAccount.java` (in package `bank`)
+
+```java
+package bank;
+
+public class BankAccount {
+    private String accountNumber = "1234567890";  // only inside this class
+    String accountHolder = "John Doe";            // default access
+    protected double balance = 10000.0;           // subclass or same package
+    public String bankName = "National Bank";     // accessible anywhere
+
+    public void showDetails() {
+        System.out.println("Account Number: " + accountNumber);
+        System.out.println("Account Holder: " + accountHolder);
+        System.out.println("Balance: " + balance);
+        System.out.println("Bank Name: " + bankName);
+    }
+}
+```
+
+---
+
+### ✅ `InternalAudit.java` (in same package `bank`)
+
+```java
+package bank;
+
+public class InternalAudit {
+    public void audit() {
+        BankAccount acc = new BankAccount();
+
+        // System.out.println(acc.accountNumber); ❌ private - not accessible
+        System.out.println(acc.accountHolder);     // ✅ default - same package
+        System.out.println(acc.balance);           // ✅ protected - same package
+        System.out.println(acc.bankName);          // ✅ public - always accessible
+    }
+}
+```
+
+---
+
+### ✅ `ExternalAudit.java` (in **another** package)
+
+```java
+package other;
+
+import bank.BankAccount;
+
+public class ExternalAudit extends BankAccount {
+    public void externalCheck() {
+        BankAccount acc = new BankAccount();
+
+        // System.out.println(acc.accountNumber); ❌ private
+        // System.out.println(acc.accountHolder); ❌ default - not same package
+        // System.out.println(acc.balance); ❌ protected but not through reference
+        System.out.println(acc.bankName);          // ✅ public
+
+        // ✅ BUT: protected members can be accessed via inheritance
+        System.out.println("Inherited balance: " + balance); // ✅ allowed in subclass
+    }
+}
+```
+
+---
+
+### ✅ `Main.java`
+
+```java
+import bank.BankAccount;
+
+public class Main {
+    public static void main(String[] args) {
+        BankAccount b = new BankAccount();
+        b.showDetails(); // shows all info (via public method)
+    }
+}
+```
+
+---
+
+## 🔍 Summary: Access from Different Contexts
+
+| Member      | `BankAccount` | `InternalAudit` (same pkg) | `ExternalAudit` (subclass) | `Main` (outside) |
+| ----------- | ------------- | -------------------------- | -------------------------- | ---------------- |
+| `private`   | ✅ Yes         | ❌ No                       | ❌ No                       | ❌ No             |
+| *(default)* | ✅ Yes         | ✅ Yes                      | ❌ No                       | ❌ No             |
+| `protected` | ✅ Yes         | ✅ Yes                      | ✅ Yes (via inheritance)    | ❌ No             |
+| `public`    | ✅ Yes         | ✅ Yes                      | ✅ Yes                      | ✅ Yes            |
+
+---
+
+### ✅ Output from `Main.java`:
+
+```
+Account Number: 1234567890
+Account Holder: John Doe
+Balance: 10000.0
+Bank Name: National Bank
+```
+
+(Only because `showDetails()` is `public` and is in the same class, it can access all fields internally.)
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+## Getters and Setters in Java
+
+**Getters and Setters** are special methods used to access and update **private fields** of a class.
+
+### Why use them?
+
+* To **protect** data (encapsulation)
+* To **control access** (e.g., validate input)
+
+---
+
+### Example:
+
+```java
+class Student {
+    private String name;
+    private int age;
+
+    // Getter for name
+    public String getName() {
+        return name;
+    }
+
+    // Setter for name
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    // Getter for age
+    public int getAge() {
+        return age;
+    }
+
+    // Setter for age
+    public void setAge(int age) {
+        if (age >= 0) {
+            this.age = age;
+        } else {
+            System.out.println("Invalid age");
+        }
+    }
+}
+```
+
+---
+
+### Usage:
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        Student s = new Student();
+        s.setName("Rohith");
+        s.setAge(20);
+
+        System.out.println(s.getName()); // Rohith
+        System.out.println(s.getAge());  // 20
+    }
+}
+```
+
+---
+
+### Notes:
+
+* **getX()** returns the value of a field.
+* **setX(value)** sets the value (and can include logic, like validation).
+* Fields remain **private** for data protection; only accessible through these methods.
+
+
+
+
+
+
+
+
+
+
+
+
+## Encapsulation in Java
+
+**Encapsulation** is the OOP concept of **binding data (variables) and methods (functions)** that operate on the data into a single unit — a class. It also restricts **direct access** to some components, which is how **data hiding** is achieved.
+
+---
+
+### Key Points:
+
+* Data (variables) is made **private**.
+* Access is provided through **public getters and setters**.
+* Prevents external classes from changing object state in unexpected ways.
+* Makes the class a **self-contained, safe unit**.
+
+---
+
+### Example:
+
+```java
+class Account {
+    private double balance;  // private data
+
+    // Getter
+    public double getBalance() {
+        return balance;
+    }
+
+    // Setter
+    public void setBalance(double amount) {
+        if (amount >= 0) {
+            balance = amount;
+        } else {
+            System.out.println("Invalid balance");
+        }
+    }
+}
+```
+
+---
+
+### Usage:
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        Account acc = new Account();
+        acc.setBalance(5000);              // sets balance safely
+        System.out.println(acc.getBalance()); // 5000.0
+
+        acc.setBalance(-1000);             // Invalid balance
+        System.out.println(acc.getBalance()); // 5000.0 (unchanged)
+    }
+}
+```
+
+---
+
+### Benefits of Encapsulation:
+
+* **Data hiding**: fields can’t be accessed directly.
+* **Controlled access**: validation logic can be added in setters.
+* **Improved maintainability**: internal implementation can change without affecting other code.
+* **Reusability and Modularity**.
+
+---
+
+### Real-Life Analogy:
+
+Think of a **bank ATM**:
+
+* You can’t directly access money from the vault.
+* You request money through the ATM (methods).
+* The ATM verifies your PIN, checks balance, then gives money — this is **encapsulation**.
+
+---
+
+### Summary:
+
+Encapsulation = `private data + public methods (getters/setters) + control logic`.
+It ensures the object controls its own state and behavior.
+
+
+
+
+
+
+
+
+
+
+
+
+## Constructors in Java
+
+A **constructor** is a special method used to **initialize objects** when they are created.
+
+---
+
+### 🔹 Key Characteristics:
+
+* Has the **same name** as the class.
+* **No return type**, not even `void`.
+* Called **automatically** when an object is created using `new`.
+* Used to **assign default or initial values** to object fields.
+
+---
+
+## 🔸 Types of Constructors in Java
+
+There are **3 types**:
+
+| Type                          | Description                                            |
+| ----------------------------- | ------------------------------------------------------ |
+| **Default Constructor**       | No parameters. Provided by Java if none is defined.    |
+| **No-Argument Constructor**   | Constructor with no parameters, written explicitly.    |
+| **Parameterized Constructor** | Constructor that takes arguments to initialize fields. |
+
+---
+
+## 🔹 1. Default Constructor (provided by Java)
+
+If you don’t define any constructor, Java creates a default one.
+
+```java
+class Student {
+    int id;
+    String name;
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Student s = new Student(); // Java provides an empty constructor
+        System.out.println(s.id);     // 0 (default value)
+        System.out.println(s.name);   // null
+    }
+}
+```
+
+---
+
+## 🔹 2. No-Argument Constructor (explicitly defined)
+
+```java
+class Student {
+    int id;
+    String name;
+
+    Student() {
+        id = 101;
+        name = "Rohith";
+    }
+}
+```
+
+Usage:
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        Student s = new Student();
+        System.out.println(s.id);   // 101
+        System.out.println(s.name); // Rohith
+    }
+}
+```
+
+---
+
+## 🔹 3. Parameterized Constructor
+
+```java
+class Student {
+    int id;
+    String name;
+
+    Student(int i, String n) {
+        id = i;
+        name = n;
+    }
+}
+```
+
+Usage:
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        Student s = new Student(201, "Alice");
+        System.out.println(s.id);   // 201
+        System.out.println(s.name); // Alice
+    }
+}
+```
+
+---
+
+## 🔹 Constructor Overloading
+
+You can define **multiple constructors** in a class with different parameter lists.
+
+```java
+class Book {
+    String title;
+    double price;
+
+    // No-arg constructor
+    Book() {
+        title = "Unknown";
+        price = 0;
+    }
+
+    // Parameterized constructor
+    Book(String t, double p) {
+        title = t;
+        price = p;
+    }
+}
+```
+
+Usage:
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        Book b1 = new Book();                     // uses no-arg
+        Book b2 = new Book("Java", 499.99);       // uses parameterized
+
+        System.out.println(b1.title); // Unknown
+        System.out.println(b2.title); // Java
+    }
+}
+```
+
+---
+
+## 🔹 Summary
+
+| Type                      | Syntax Example                                                |
+| ------------------------- | ------------------------------------------------------------- |
+| Default Constructor       | `Student s = new Student();` (when no constructor is defined) |
+| No-Argument Constructor   | `Student() { ... }`                                           |
+| Parameterized Constructor | `Student(int id, String name) { ... }`                        |
+| Constructor Overloading   | Multiple constructors with different parameters               |
+
+Constructors are the **first piece of code** that runs when an object is created.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Shallow Copy vs Deep Copy in Java
+
+Both **shallow copy** and **deep copy** refer to how objects (especially objects with references to other objects) are **duplicated** in memory.
+
+---
+
+## 🔹 1. Shallow Copy
+
+* A **shallow copy** copies the object’s **references**, not the actual inner objects.
+* Both the original and the copied object share the **same memory address** for referenced fields.
+* Changes in the nested object via one reference affect the other.
+
+### Example:
+
+```java
+class Address {
+    String city;
+}
+
+class Person implements Cloneable {
+    String name;
+    Address address;
+
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone(); // shallow copy
+    }
+}
+
+public class Main {
+    public static void main(String[] args) throws CloneNotSupportedException {
+        Address addr = new Address();
+        addr.city = "Delhi";
+
+        Person p1 = new Person();
+        p1.name = "Rohith";
+        p1.address = addr;
+
+        Person p2 = (Person) p1.clone(); // shallow copy
+
+        p2.address.city = "Mumbai";
+
+        System.out.println(p1.address.city); // Mumbai → same reference
+        System.out.println(p2.address.city); // Mumbai
+    }
+}
+```
+
+---
+
+## 🔹 2. Deep Copy
+
+* A **deep copy** copies everything — including **nested objects**.
+* Original and copied objects are **fully independent**.
+* Changes in one object do **not** affect the other.
+
+### Example:
+
+```java
+class Address {
+    String city;
+
+    public Address(String city) {
+        this.city = city;
+    }
+
+    public Address(Address other) {
+        this.city = other.city;
+    }
+}
+
+class Person {
+    String name;
+    Address address;
+
+    public Person(String name, Address address) {
+        this.name = name;
+        this.address = new Address(address); // deep copy of address
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Address addr = new Address("Delhi");
+
+        Person p1 = new Person("Rohith", addr);
+        Person p2 = new Person("Kiran", p1.address); // deep copy
+
+        p2.address.city = "Mumbai";
+
+        System.out.println(p1.address.city); // Delhi
+        System.out.println(p2.address.city); // Mumbai
+    }
+}
+```
+
+---
+
+## 🔹 Summary Table
+
+| Feature           | Shallow Copy                     | Deep Copy                             |
+| ----------------- | -------------------------------- | ------------------------------------- |
+| Copies            | Object + references              | Object + entire object graph (clones) |
+| Nested Objects    | Shared between original and copy | Separate copies                       |
+| Speed             | Faster                           | Slower                                |
+| Changes in nested | Affects both                     | Independent                           |
+| Use               | When sharing nested data is OK   | When full independence is needed      |
+
+---
+
+## 🔹 Notes
+
+* `Object.clone()` in Java performs **shallow copy** by default.
+* For **deep copy**, you must manually copy inner objects (or use serialization frameworks).
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Inheritance in Java
+
+**Inheritance** is an OOP concept where a class (child/subclass) can **inherit fields and methods** from another class (parent/superclass).
+This promotes **code reusability**, **extensibility**, and **modularity**.
+
+---
+
+## 🔹 Syntax
+
+```java
+class Parent {
+    // fields and methods
+}
+
+class Child extends Parent {
+    // inherits from Parent
+}
+```
+
+---
+
+## 🔸 Types of Inheritance in Java
+
+| Type                           | Supported in Java?           | Description                                          |
+| ------------------------------ | ---------------------------- | ---------------------------------------------------- |
+| Single Inheritance             | ✅ Yes                        | One class inherits from another                      |
+| Multilevel Inheritance         | ✅ Yes                        | Chain of inheritance                                 |
+| Hierarchical Inheritance       | ✅ Yes                        | Multiple classes inherit from one                    |
+| Multiple Inheritance (classes) | ❌ No                         | Java doesn’t allow multiple inheritance with classes |
+| Hybrid Inheritance             | ✅ Partially (via interfaces) | Combination of multiple types                        |
+
+---
+
+## 🔹 1. Single Inheritance
+
+One child class inherits from one parent class.
+
+```java
+class Animal {
+    void eat() {
+        System.out.println("Eating");
+    }
+}
+
+class Dog extends Animal {
+    void bark() {
+        System.out.println("Barking");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Dog d = new Dog();
+        d.eat();  // inherited
+        d.bark(); // own method
+    }
+}
+```
+
+---
+
+## 🔹 2. Multilevel Inheritance
+
+One class inherits from another, and that class is inherited by another.
+
+```java
+class Animal {
+    void eat() {
+        System.out.println("Eating");
+    }
+}
+
+class Dog extends Animal {
+    void bark() {
+        System.out.println("Barking");
+    }
+}
+
+class Puppy extends Dog {
+    void weep() {
+        System.out.println("Weeping");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Puppy p = new Puppy();
+        p.eat();   // from Animal
+        p.bark();  // from Dog
+        p.weep();  // own method
+    }
+}
+```
+
+---
+
+## 🔹 3. Hierarchical Inheritance
+
+Multiple classes inherit from a single parent class.
+
+```java
+class Animal {
+    void eat() {
+        System.out.println("Eating");
+    }
+}
+
+class Dog extends Animal {
+    void bark() {
+        System.out.println("Barking");
+    }
+}
+
+class Cat extends Animal {
+    void meow() {
+        System.out.println("Meowing");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Dog d = new Dog();
+        d.eat(); d.bark();
+
+        Cat c = new Cat();
+        c.eat(); c.meow();
+    }
+}
+```
+
+---
+
+## 🔹 4. Hybrid Inheritance (using interfaces)
+
+Java doesn't support multiple inheritance with **classes** to avoid ambiguity, but **hybrid inheritance** is possible using **interfaces**.
+
+```java
+interface A {
+    void methodA();
+}
+
+interface B {
+    void methodB();
+}
+
+class C implements A, B {
+    public void methodA() {
+        System.out.println("A's method");
+    }
+    public void methodB() {
+        System.out.println("B's method");
+    }
+}
+
+class D extends C {
+    void methodD() {
+        System.out.println("D's method");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        D obj = new D();
+        obj.methodA();
+        obj.methodB();
+        obj.methodD();
+    }
+}
+```
+
+---
+
+## 🔹 Summary Table
+
+| Inheritance Type        | Structure                         | Supported |
+| ----------------------- | --------------------------------- | --------- |
+| Single                  | A → B                             | ✅         |
+| Multilevel              | A → B → C                         | ✅         |
+| Hierarchical            | A → B, A → C                      | ✅         |
+| Multiple                | A → B, A → C, B + C → D (❌ error) | ❌         |
+| Hybrid (via interfaces) | Combination of above              | ✅         |
+
+Java avoids **multiple inheritance of classes** to prevent the **diamond problem**, but allows **multiple interfaces**.
+
+
+
+
+
+
+
+
+
+
+
+
+## Polymorphism in Java
+
+**Polymorphism** means **“many forms”** — the same method behaves **differently** based on the context (object or parameters).
+
+### Types:
+
+1. **Compile-time Polymorphism** → *Method Overloading*
+2. **Runtime Polymorphism** → *Method Overriding*
+
+---
+
+## 1. Method Overloading (Compile-time Polymorphism)
+
+Multiple methods with the **same name** but **different parameters** (type or number) **within the same class**.
+
+### Example:
+
+```java
+class Calculator {
+    int add(int a, int b) {
+        return a + b;
+    }
+
+    double add(double a, double b) {
+        return a + b;
+    }
+
+    int add(int a, int b, int c) {
+        return a + b + c;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Calculator c = new Calculator();
+        System.out.println(c.add(2, 3));        // 5
+        System.out.println(c.add(2.5, 3.5));    // 6.0
+        System.out.println(c.add(1, 2, 3));     // 6
+    }
+}
+```
+
+### Rules:
+
+* Same method name
+* Must differ in **number**, **type**, or **order** of parameters
+* Return type alone **cannot** differentiate methods
+
+---
+
+## 2. Method Overriding (Runtime Polymorphism)
+
+**Subclass provides its own implementation** of a method defined in the **parent class**.
+
+### Example:
+
+```java
+class Animal {
+    void sound() {
+        System.out.println("Some sound");
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    void sound() {
+        System.out.println("Bark");
+    }
+}
+
+class Cat extends Animal {
+    @Override
+    void sound() {
+        System.out.println("Meow");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Animal a1 = new Dog();
+        Animal a2 = new Cat();
+
+        a1.sound();  // Bark
+        a2.sound();  // Meow
+    }
+}
+```
+
+### Key Points:
+
+* Same method signature in superclass and subclass
+* Decided at **runtime** (dynamic dispatch)
+* Achieved via **inheritance**
+* Use `@Override` annotation for clarity (optional but recommended)
+
+---
+
+## Differences Between Overloading and Overriding
+
+| Feature          | Overloading               | Overriding                             |
+| ---------------- | ------------------------- | -------------------------------------- |
+| Type             | Compile-time polymorphism | Runtime polymorphism                   |
+| Inheritance      | Not required              | Requires inheritance                   |
+| Method signature | Must differ               | Must be same                           |
+| Return type      | Can differ                | Must be same or covariant              |
+| Access modifier  | No restriction            | Cannot reduce visibility               |
+| Static methods   | Can be overloaded         | Cannot be overridden (they are hidden) |
+
+---
+
+## Summary
+
+* **Overloading**: same method name, different arguments, resolved at compile-time.
+* **Overriding**: same method name and signature in child class, resolved at runtime.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Packages in Java
+
+A **package** in Java is a **namespace** that organizes classes and interfaces into a **structured folder-like system**.
+
+---
+
+## 🔹 Why Use Packages?
+
+* **Avoid name conflicts** (e.g., `Student` class in different packages)
+* **Group related classes logically**
+* **Control access** using access modifiers (like `public`, `default`)
+* **Easier to maintain and find code**
+
+---
+
+## 🔹 Types of Packages
+
+1. **Built-in Packages** – Provided by Java
+
+   * Examples: `java.util`, `java.io`, `java.lang`, `java.net`
+2. **User-defined Packages** – Created by the programmer
+
+---
+
+## 🔹 Creating and Using a User-Defined Package
+
+### Step 1: Create a package and class
+
+**File: `MyClass.java`**
+
+```java
+package mypackage;
+
+public class MyClass {
+    public void display() {
+        System.out.println("Hello from MyClass in mypackage");
+    }
+}
+```
+
+* `package mypackage;` → declares the package
+* Save this file inside a folder named `mypackage`
+
+---
+
+### Step 2: Use the package in another class
+
+**File: `Main.java`**
+
+```java
+import mypackage.MyClass; // import the class from the package
+
+public class Main {
+    public static void main(String[] args) {
+        MyClass obj = new MyClass();
+        obj.display();
+    }
+}
+```
+
+---
+
+## 🔹 Compiling and Running (Command Line)
+
+```bash
+javac mypackage/MyClass.java
+javac -cp . Main.java
+java Main
+```
+
+---
+
+## 🔹 Access Control with Packages
+
+| Modifier    | Same Class | Same Package | Subclass (diff pkg) | Other Packages |
+| ----------- | ---------- | ------------ | ------------------- | -------------- |
+| `private`   | ✅          | ❌            | ❌                   | ❌              |
+| *(default)* | ✅          | ✅            | ❌                   | ❌              |
+| `protected` | ✅          | ✅            | ✅                   | ❌              |
+| `public`    | ✅          | ✅            | ✅                   | ✅              |
+
+---
+
+## 🔹 Importing Packages
+
+* Import single class:
+
+  ```java
+  import java.util.Scanner;
+  ```
+* Import all classes in a package:
+
+  ```java
+  import java.util.*;
+  ```
+
+---
+
+## 🔹 Built-in Package Example
+
+```java
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter name: ");
+        String name = sc.nextLine();
+        System.out.println("Hello " + name);
+    }
+}
+```
+
+---
+
+## Summary
+
+* A **package** is a container for related classes.
+* Helps in **organizing code**, **avoiding conflicts**, and **controlling access**.
+* Can be **built-in** or **user-defined**.
+* Use `package` to declare and `import` to use packages.
+
+
+
+
+
+
+
+
+## Abstraction in Java
+
+**Abstraction** means **hiding internal details** and showing **only the essential features** of an object.
+It focuses on **what an object does**, not *how* it does it.
+
+---
+
+### 🔹 Real-World Example:
+
+A **car**:
+
+* You can drive, brake, or change gears (what it does ✅).
+* You don’t need to know how the engine or brake system works internally (how it does ❌).
+
+---
+
+## 🔹 Why Use Abstraction?
+
+* To reduce complexity
+* To protect internal implementation
+* To expose only necessary operations (APIs)
+* To provide a clean and understandable interface
+
+---
+
+## Ways to Achieve Abstraction in Java:
+
+1. **Abstract classes**
+2. **Interfaces**
+
+---
+
+## 🔸 Abstract Class in Java
+
+### Definition:
+
+An **abstract class** is a class that:
+
+* **Cannot be instantiated**
+* Can contain **abstract methods** (without body)
+* Can also contain **concrete methods** (with body)
+
+### Syntax:
+
+```java
+abstract class Shape {
+    abstract void draw(); // abstract method
+
+    void message() {      // concrete method
+        System.out.println("This is a shape");
+    }
+}
+```
+
+---
+
+### ✅ Example of Abstraction using Abstract Class
+
+```java
+abstract class Animal {
+    abstract void sound();  // abstract method
+
+    void sleep() {
+        System.out.println("Sleeping...");
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    void sound() {
+        System.out.println("Bark");
+    }
+}
+
+class Cat extends Animal {
+    @Override
+    void sound() {
+        System.out.println("Meow");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Animal a1 = new Dog();
+        Animal a2 = new Cat();
+
+        a1.sound(); // Bark
+        a2.sound(); // Meow
+
+        a1.sleep(); // Sleeping...
+    }
+}
+```
+
+---
+
+## 🔹 Rules of Abstract Class
+
+| Feature                      | Supported in Abstract Class |
+| ---------------------------- | --------------------------- |
+| Can have abstract methods    | ✅ Yes                       |
+| Can have concrete methods    | ✅ Yes                       |
+| Can have constructors        | ✅ Yes                       |
+| Can have member variables    | ✅ Yes                       |
+| Can be extended (inherited)  | ✅ Yes                       |
+| Can be instantiated directly | ❌ No                        |
+
+---
+
+## 🔹 Summary
+
+* **Abstraction**: Hiding the internal logic, showing only essential features.
+* Achieved via **abstract classes** and **interfaces**.
+* An **abstract class** is a partially implemented class.
+* You must **extend** it and **override** abstract methods to use it.
+
+---
+
+
+
+
+
+
+
+
+
+
+
+## Interfaces in Java
+
+An **interface** in Java is a **completely abstract blueprint** for a class. It defines **what a class must do**, but **not how**.
+
+Think of an interface as a **contract** that a class agrees to **implement**.
+
+---
+
+## 🔹 Why Use Interfaces?
+
+* Achieve **100% abstraction**
+* Support **multiple inheritance**
+* Provide a common standard for classes
+* Enable **loose coupling**
+
+---
+
+## 🔸 Syntax
+
+```java
+interface Vehicle {
+    void start();  // abstract method
+}
+```
+
+* All methods in interfaces are **implicitly** `public` and `abstract` (before Java 8)
+* Fields are `public static final` (constants)
+
+---
+
+## 🔸 Example 1: Simple Interface Implementation
+
+```java
+interface Animal {
+    void sound();
+}
+
+class Dog implements Animal {
+    public void sound() {
+        System.out.println("Bark");
+    }
+}
+
+class Cat implements Animal {
+    public void sound() {
+        System.out.println("Meow");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Animal a1 = new Dog();
+        Animal a2 = new Cat();
+        a1.sound();  // Bark
+        a2.sound();  // Meow
+    }
+}
+```
+
+---
+
+## 🔸 Example 2: Multiple Inheritance with Interfaces
+
+```java
+interface A {
+    void methodA();
+}
+
+interface B {
+    void methodB();
+}
+
+class C implements A, B {
+    public void methodA() {
+        System.out.println("Method A");
+    }
+
+    public void methodB() {
+        System.out.println("Method B");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        C obj = new C();
+        obj.methodA();  // Method A
+        obj.methodB();  // Method B
+    }
+}
+```
+
+---
+
+## 🔹 Interface vs Abstract Class
+
+| Feature              | Interface                       | Abstract Class             |
+| -------------------- | ------------------------------- | -------------------------- |
+| Methods              | Only abstract (Java 7)          | Abstract + Concrete        |
+| Access Modifier      | Methods are `public` by default | Can use any modifier       |
+| Multiple Inheritance | ✅ Supported                     | ❌ Not supported            |
+| Constructors         | ❌ Not allowed                   | ✅ Allowed                  |
+| Fields               | `public static final` only      | Any type                   |
+| Implementation       | Must use `implements` keyword   | Must use `extends` keyword |
+
+---
+
+## 🔹 Java 8+ and Interfaces
+
+Interfaces can also have:
+
+* **Default methods** (with body)
+* **Static methods**
+
+```java
+interface Greet {
+    default void sayHello() {
+        System.out.println("Hello!");
+    }
+
+    static void staticMethod() {
+        System.out.println("Static method in interface");
+    }
+}
+```
+
+---
+
+## 🔹 Summary
+
+* **Interface** defines only the method signatures.
+* A class **implements** an interface and provides method bodies.
+* Java allows a class to **implement multiple interfaces**.
+* Used for **100% abstraction** and **multiple inheritance**.
+* Introduced **default and static methods** in Java 8.
+
+
+
+
+
+
+
+
+## `static` and `super` Keywords in Java
+
+These are **special keywords** in Java that control behavior of methods, variables, and class relationships.
+
+---
+
+## 🔹 `static` Keyword
+
+### ✅ Meaning:
+
+`static` is used to declare **class-level** members — shared by **all instances** of a class.
+
+### 🔸 Use cases:
+
+1. Static **variables**
+2. Static **methods**
+3. Static **blocks**
+4. Static **classes** (nested)
+
+---
+
+### 🔸 1. Static Variable (Class variable)
+
+Shared across all objects.
+
+```java
+class Student {
+    static String school = "ABC School";
+    String name;
+
+    Student(String name) {
+        this.name = name;
+    }
+
+    void display() {
+        System.out.println(name + " studies at " + school);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Student s1 = new Student("Ravi");
+        Student s2 = new Student("Anjali");
+
+        s1.display();  // Ravi studies at ABC School
+        s2.display();  // Anjali studies at ABC School
+    }
+}
+```
+
+---
+
+### 🔸 2. Static Method
+
+Can be called **without object**. Can access **only static members**.
+
+```java
+class MathUtils {
+    static int square(int x) {
+        return x * x;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        System.out.println(MathUtils.square(5));  // 25
+    }
+}
+```
+
+---
+
+### 🔸 3. Static Block
+
+Runs **once** when class is loaded (used for static initialization).
+
+```java
+class Demo {
+    static {
+        System.out.println("Static block called");
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Main method");
+    }
+}
+```
+
+**Output:**
+
+```
+Static block called  
+Main method
+```
+
+---
+
+## 🔹 `super` Keyword
+
+### ✅ Meaning:
+
+Used to refer to **parent class** (superclass) members:
+
+* Call parent’s constructor
+* Access parent’s method or variable
+
+---
+
+### 🔸 1. Call Parent Constructor
+
+```java
+class Parent {
+    Parent() {
+        System.out.println("Parent constructor");
+    }
+}
+
+class Child extends Parent {
+    Child() {
+        super(); // optional if Parent has no-arg constructor
+        System.out.println("Child constructor");
+    }
+}
+```
+
+**Output:**
+
+```
+Parent constructor  
+Child constructor
+```
+
+---
+
+### 🔸 2. Call Parent Method
+
+```java
+class Animal {
+    void sound() {
+        System.out.println("Animal sound");
+    }
+}
+
+class Dog extends Animal {
+    void sound() {
+        super.sound();  // Call parent method
+        System.out.println("Dog barks");
+    }
+}
+```
+
+**Output:**
+
+```
+Animal sound  
+Dog barks
+```
+
+---
+
+### 🔸 3. Access Parent Variable
+
+```java
+class Parent {
+    int x = 100;
+}
+
+class Child extends Parent {
+    int x = 200;
+
+    void printX() {
+        System.out.println("Child x = " + x);         // 200
+        System.out.println("Parent x = " + super.x);  // 100
+    }
+}
+```
+
+---
+
+## 🔹 Summary Table
+
+| Keyword  | Purpose                | Usage Location     | Accesses                  |
+| -------- | ---------------------- | ------------------ | ------------------------- |
+| `static` | Belongs to the class   | Variables, methods | Shared across all objects |
+| `super`  | Refers to parent class | Inside child class | Parent's methods/fields   |
+
+Both are essential for controlling **inheritance** (`super`) and **shared behavior** (`static`) in Java.
+
+
+
+
+
+
+
+
+## `implements` vs `extends` in Java
+
+In Java, both `implements` and `extends` are used for **inheritance**, but they work differently and are used with **different types** of inheritance.
+
+---
+
+## 🔹 `extends` keyword
+
+Used when:
+
+* A **class inherits another class** (single inheritance)
+* An **interface inherits another interface**
+
+---
+
+### 🔸 Syntax (Class to Class)
+
+```java
+class A {
+    void show() {
+        System.out.println("Class A");
+    }
+}
+
+class B extends A {
+    void display() {
+        System.out.println("Class B");
+    }
+}
+```
+
+### 🔸 Syntax (Interface to Interface)
+
+```java
+interface A {
+    void methodA();
+}
+
+interface B extends A {
+    void methodB();
+}
+```
+
+---
+
+## 🔹 `implements` keyword
+
+Used when:
+
+* A **class inherits (implements)** an **interface**
+
+---
+
+### 🔸 Syntax
+
+```java
+interface Animal {
+    void sound();
+}
+
+class Dog implements Animal {
+    public void sound() {
+        System.out.println("Bark");
+    }
+}
+```
+
+---
+
+## 🔹 Key Differences
+
+| Feature                | `extends`                            | `implements`                     |
+| ---------------------- | ------------------------------------ | -------------------------------- |
+| Used with              | Class ↔ Class, Interface ↔ Interface | Class ↔ Interface                |
+| Inherits               | Class or Interface                   | Only Interface                   |
+| Type                   | Concrete or abstract class           | Interface (abstract by default)  |
+| Multiple inheritance   | ❌ Not allowed for classes            | ✅ Class can implement many       |
+| Must override methods? | Only if abstract class has them      | ✅ Yes, must override all methods |
+| Constructor usage      | `super()` to call parent             | No constructor in interface      |
+
+---
+
+## 🔹 Example: `extends` vs `implements`
+
+```java
+class Animal {
+    void eat() {
+        System.out.println("Eating...");
+    }
+}
+
+interface Pet {
+    void play();
+}
+
+// Dog extends class and implements interface
+class Dog extends Animal implements Pet {
+    public void play() {
+        System.out.println("Dog plays");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Dog d = new Dog();
+        d.eat();   // from Animal
+        d.play();  // from Pet
+    }
+}
+```
+
+---
+
+## 🔹 Summary
+
+* Use **`extends`** to inherit from a **class** or an **interface (to interface)**.
+* Use **`implements`** when a **class adopts an interface**.
+* A class can:
+
+  * `extend` **one class**
+  * `implement` **multiple interfaces**
+
+```java
+class A { }
+interface X { }
+interface Y { }
+
+class B extends A implements X, Y { }
+```
+
+This is how Java supports **multiple inheritance** using **interfaces**.

@@ -1,0 +1,74 @@
+
+---
+
+## **1. What is `useState`?**
+
+`useState` is a **React Hook** that lets you add **state variables** to functional components.
+Before Hooks, only **class components** could have state — but now, functional components can too.
+
+Think of **state** as a box that holds data your component can remember and update over time.
+
+---
+
+## **2. Syntax**
+
+```javascript
+const [stateVariable, setStateFunction] = useState(initialValue);
+```
+
+* **`stateVariable`** → The current value of the state.
+* **`setStateFunction`** → A function to update the state.
+* **`initialValue`** → The default value for the state (can be a string, number, boolean, object, array, etc.).
+
+---
+
+## **3. Example: Counter**
+
+```javascript
+import React, { useState } from "react";
+
+function Counter() {
+  // Step 1: Declare state
+  const [count, setCount] = useState(0);
+
+  // Step 2: Function to update state
+  const increment = () => {
+    setCount(count + 1); // updates the state
+  };
+
+  const decrement = () => {
+    setCount(count - 1);
+  };
+
+  return (
+    <div>
+      <h1>Count: {count}</h1>
+      <button onClick={increment}>+</button>
+      <button onClick={decrement}>-</button>
+    </div>
+  );
+}
+
+export default Counter;
+```
+
+---
+
+## **4. How it Works (Workflow)**
+
+1. **Initial Render** → `count` is set to `0`.
+2. **Click "+"** → `setCount(count + 1)` updates state.
+3. React **re-renders** the component with the new value.
+4. UI shows updated count.
+
+---
+
+## **5. Key Points**
+
+* Updating state **re-renders** the component.
+* State updates are **asynchronous** (React batches them for performance).
+* You can store **any data type** in state.
+* Never directly modify state variables (`count = count + 1 ❌`), always use the setter function.
+
+---
+

@@ -1,0 +1,83 @@
+
+---
+
+## **1. Definition**
+
+`useMemo` is a React Hook that **memoizes** (remembers) the result of a calculation and only re-computes it when its dependencies change.
+It’s used to avoid **expensive re-calculations** on every render.
+
+---
+
+## **2. Syntax**
+
+```javascript
+const memoizedValue = useMemo(() => {
+  // expensive computation
+  return result;
+}, [dependencies]);
+```
+
+* **`() => {}`** → Function that calculates the value.
+* **`[dependencies]`** → Only re-run calculation when these values change.
+* Returns **cached value** until dependencies change.
+
+---
+
+## **3. Example: Expensive Calculation**
+
+```javascript
+import React, { useState, useMemo } from "react";
+
+function ExpensiveComponent() {
+  const [count, setCount] = useState(0);
+  const [other, setOther] = useState(false);
+
+  const expensiveValue = useMemo(() => {
+    console.log("Running expensive calculation...");
+    let total = 0;
+    for (let i = 0; i < 1_000_000_000; i++) {
+      total += i;
+    }
+    return total + count;
+  }, [count]); // only re-run when count changes
+
+  return (
+    <div>
+      <h1>Expensive Value: {expensiveValue}</h1>
+      <button onClick={() => setCount(count + 1)}>Increase Count</button>
+      <button onClick={() => setOther(!other)}>Toggle Other</button>
+    </div>
+  );
+}
+
+export default ExpensiveComponent;
+```
+
+---
+
+## **4. Workflow**
+
+1. Component renders.
+2. `useMemo` checks dependencies.
+3. If they haven’t changed → returns **cached value**.
+4. If they changed → runs the function again and updates the cache.
+
+---
+
+## **5. Key Points**
+
+* Prevents expensive recalculations on every render.
+* Should **only** be used for performance issues — overusing it can make code harder to read.
+* Works for **values**, not for functions (for functions we use `useCallback`).
+
+---
+
+## **6. Real-World Uses**
+
+* Filtering or sorting large datasets.
+* Complex mathematical or statistical calculations.
+* Expensive formatting logic (e.g., parsing dates, currency formatting).
+* Memoizing derived state from large objects.
+
+---
+

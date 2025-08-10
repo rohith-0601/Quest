@@ -1,0 +1,92 @@
+
+---
+
+## **1. Definition**
+
+`useReducer` is a React Hook that manages state using a **reducer function**.
+A **reducer** takes the current state and an action, and returns the new state.
+
+It’s useful when:
+
+* State has **multiple sub-values** (objects, arrays)
+* State updates depend on **complex logic**
+* You want a predictable way to handle actions (similar to Redux)
+
+---
+
+## **2. Syntax**
+
+```javascript
+const [state, dispatch] = useReducer(reducer, initialState);
+```
+
+* **`reducer`** → Function `(state, action) => newState`
+* **`initialState`** → The starting value
+* **`dispatch`** → Function to send actions
+
+---
+
+## **3. Example: Counter with Actions**
+
+```javascript
+import React, { useReducer } from "react";
+
+// Reducer function
+function counterReducer(state, action) {
+  switch (action.type) {
+    case "increment":
+      return { count: state.count + 1 };
+    case "decrement":
+      return { count: state.count - 1 };
+    case "reset":
+      return { count: 0 };
+    default:
+      return state;
+  }
+}
+
+export default function Counter() {
+  const [state, dispatch] = useReducer(counterReducer, { count: 0 });
+
+  return (
+    <div>
+      <h1>Count: {state.count}</h1>
+      <button onClick={() => dispatch({ type: "increment" })}>+</button>
+      <button onClick={() => dispatch({ type: "decrement" })}>-</button>
+      <button onClick={() => dispatch({ type: "reset" })}>Reset</button>
+    </div>
+  );
+}
+```
+
+---
+
+## **4. Workflow**
+
+1. `useReducer` stores the current state.
+2. When `dispatch(action)` is called:
+
+   * The reducer function runs.
+   * It decides how to update state based on `action.type`.
+3. React re-renders with the new state.
+
+---
+
+## **5. Key Points**
+
+* **Great for complex state** with multiple related values.
+* Keeps state update logic in **one place** (the reducer function).
+* Can be used with **context** for global state management (mini Redux).
+* Makes testing easier because the reducer is just a pure function.
+
+---
+
+## **6. Real-World Uses**
+
+* Shopping cart in an e-commerce app
+* Form state management
+* Multi-step workflows (wizard forms)
+* Game state handling (moves, score, history)
+
+---
+

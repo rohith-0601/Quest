@@ -1,0 +1,104 @@
+
+
+## **1. Definition**
+
+`useContext` is a React Hook that lets you **read and subscribe to a value from React Context**.
+
+**Context** in React is a way to pass data through the component tree **without** having to manually pass props at every level (called "prop drilling").
+
+---
+
+## **2. Syntax**
+
+```javascript
+const value = useContext(MyContext);
+```
+
+* **`MyContext`** → A context object created with `React.createContext`.
+* Returns the **current context value** for that context.
+* The value is set by a **`<MyContext.Provider>`** higher in the tree.
+
+---
+
+## **3. Example: Theme Context**
+
+```javascript
+import React, { createContext, useContext, useState } from "react";
+
+// 1️⃣ Create context
+const ThemeContext = createContext();
+
+function ThemeProvider({ children }) {
+  const [theme, setTheme] = useState("light");
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  };
+
+  return (
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+}
+
+function ThemeButton() {
+  // 2️⃣ Use context
+  const { theme, toggleTheme } = useContext(ThemeContext);
+
+  return (
+    <button
+      onClick={toggleTheme}
+      style={{
+        padding: "10px",
+        background: theme === "light" ? "#eee" : "#333",
+        color: theme === "light" ? "#000" : "#fff"
+      }}
+    >
+      Current Theme: {theme}
+    </button>
+  );
+}
+
+export default function App() {
+  return (
+    <ThemeProvider>
+      <div style={{ padding: "20px" }}>
+        <h1>useContext Example</h1>
+        <ThemeButton />
+      </div>
+    </ThemeProvider>
+  );
+}
+```
+
+---
+
+## **4. Workflow**
+
+1. Create a **context** using `createContext()`.
+2. Wrap components with a **Provider** and pass value (state, functions, etc.).
+3. Inside child components, call `useContext(MyContext)` to get the value.
+4. Any updates to the context value cause all consumers to re-render.
+
+---
+
+## **5. Key Points**
+
+* **Avoids prop drilling** — useful for deeply nested components.
+* Works with **state**, **functions**, and **objects**.
+* All components consuming a context will re-render when the context value changes.
+* For large apps, sometimes **state management libraries** (Redux, Zustand) are better for performance.
+
+---
+
+## **6. Real-World Uses**
+
+* Theme switching (light/dark mode)
+* User authentication data (logged-in user, tokens)
+* Language/locale switching
+* Shopping cart data in an e-commerce app
+* Live socket connections
+
+---
+
